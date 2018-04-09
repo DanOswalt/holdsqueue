@@ -1,0 +1,5 @@
+rgb(81, 190, 192) #51bec0 Light Blue
+rgb(108, 20, 2) #6c1402 Dark Red
+rgb(218, 69, 68) #da4544 Pinkish
+rgb(239, 118, 48) #ef7630 Orange
+rgb(15, 35, 38) #0f2326 Very Dark Green
