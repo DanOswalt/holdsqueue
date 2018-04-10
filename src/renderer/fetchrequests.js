@@ -33,6 +33,8 @@ const displayHoldsQueueInTerminal = (holdsQueue) => {
 }
 
 const fetchRequests = (component) => {
+  component.isRequestingData = true
+
   const req = {
     query: 'https://api-eu.hosted.exlibrisgroup.com/almaws/v1/task-lists/requested-resources',
     library: 'Watzek', // required
@@ -91,22 +93,26 @@ const fetchRequests = (component) => {
 
             component.holds = processHoldsData(requestedResources)
             component.lastCheck = new Date()
-            console.log(new Date())
+            component.isRequestingData = false
           }).catch(error => {
             console.dir(error.response.data.errorList.error)
+            component.isRequestingData = false
           })
       } else {
         console.log('only needed one try, go to process')
         component.holds = processHoldsData(requestedResources)
         component.lastCheck = new Date()
+        component.isRequestingData = false
         console.log(new Date())
       }
     })
     .catch(error => {
       if (error.response != null) {
         console.dir(error.response.data.errorList.error)
+        component.isRequestingData = false
       } else {
         console.dir(error)
+        component.isRequestingData = false
       }
     })
 }
