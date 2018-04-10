@@ -3,15 +3,14 @@
     <main>
       <header>
         <span class="title">Current Local Holds ({{ holds.length }})</span>
-        <!-- <span><img class="loading-img" v-show="isRequestingData" src="../assets/spinner.gif" alt=""/></span> -->
       </header>
       <ul id="queue">
         <li v-for="hold in holds"
             class="cell info">
-          <p class="hold-call-number"> {{ hold.callNumber }} ({{ hold.shelvingLocation }})</p>
+          <p class="hold-call-number"><a :href="hold.primoLink">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
           <p class="hold-title"> {{ hold.title }} </p>
           <p class="hold-author"> - {{ hold.author }} </p>
-        </li>
+        </a></li>
       </ul>
       <div class="spinner" v-show="isRequestingData">
         <div class="bounce1"></div>
@@ -42,7 +41,7 @@
       const component = this
       const fetchRequests = require('../fetchRequests.js')
       fetchRequests(component)
-      setInterval(fetchRequests, 1 * 60 * 1000, component)
+      setInterval(fetchRequests, 2 * 60 * 1000, component)
     }
   }
 </script>
@@ -58,12 +57,7 @@
   body {
     font-family: 'Monaco', sans-serif;
     color: #eee;
-  }
-
-  #wrapper {
     background: #0f2326;
-    height: 100vh;
-    width: 100vw;
   }
 
   header {
@@ -104,6 +98,8 @@
     opacity: 0.7;
     font-size: 12px;
   }
+
+
 
   /* http://tobiasahlin.com/spinkit/ */
 
