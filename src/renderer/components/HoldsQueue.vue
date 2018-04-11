@@ -3,6 +3,7 @@
     <main>
       <header>
         <span class="title">Current Local Holds ({{ holds.length }})</span>
+        <div id="print" class="cell">print</div>
       </header>
       <ul id="queue">
         <li v-for="hold in holds"

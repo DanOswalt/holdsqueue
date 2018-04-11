@@ -40,7 +40,7 @@ const fetchRequests = (component) => {
     query: 'https://api-eu.hosted.exlibrisgroup.com/almaws/v1/task-lists/requested-resources',
     library: 'Watzek', // required
     circ_desk: 'DEFAULT_CIRC_DESK', // required
-    apikey: 'l7xx7ad7bd452f5948c8862d81717b0356f8', // required
+    apikey: process.env.HQAPIKEY, // required
     format: 'json',
     limit: 100,
     offset: 100,
