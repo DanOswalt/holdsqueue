@@ -7,7 +7,7 @@
       <ul id="queue">
         <li v-for="hold in holds"
             class="cell info">
-          <p class="hold-call-number"><a :href="hold.primoLink">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
+          <p class="hold-call-number"><a :href="hold.primoLink" target="_blank">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
           <p class="hold-title"> {{ hold.title }} </p>
           <p class="hold-author"> - {{ hold.author }} </p>
         </a></li>
@@ -72,6 +72,11 @@
     padding: 0;
   }
 
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
   .cell {
     height: 80px;
     width: 390px;
@@ -82,6 +87,10 @@
     margin: 4px;
     border-radius: 10px;
     color: #a9e0e5;
+  }
+
+  .cell:hover {
+    opacity: 0.7;
   }
 
   .hold-call-number {
