@@ -13,7 +13,6 @@
       <ul id="queue">
       <!-- <transition-group name="list-item" tag="ul" id="queue"> -->
         <li v-for="hold in holds"
-            :key="hold"
             class="cell info">
           <p class="hold-call-number"><a :href="hold.primoLink" target="_blank">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
           <p class="hold-title"> {{ hold.title }} </p>
