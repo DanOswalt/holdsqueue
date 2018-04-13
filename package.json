@@ -55,10 +55,11 @@
     }
   },
   "dependencies": {
-    "vue": "^2.3.3",
     "axios": "^0.16.1",
+    "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
-    "vue-router": "^2.5.3"
+    "vue-router": "^2.5.3",
+    "vue-visible": "^1.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

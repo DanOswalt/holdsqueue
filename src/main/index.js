@@ -1,6 +1,10 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
+
+const path = require('path')
+const fs = require('fs')
+const os = require('os')
 
 /**
  * Set `__static` path to static files in production
@@ -45,6 +49,23 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+/* events from renderer */
+ipcMain.on('print-to-pdf', (e) => {
+  const pdfPath = path.join(os.tmpdir(), 'print.pdf')
+  const win = BrowserWindow.fromWebContents(e.sender)
+
+  win.webContents.printToPDF({}, (err, data) => {
+    if (err) return console.log(err.message)
+
+    fs.writeFile(pdfPath, data, (err) => {
+      if (err) return console.log(err.message)
+
+      shell.openExternal('file://' + pdfPath)
+      e.sender.send('wrote-pdf', pdfPath)
+    })
+  })
 })
 
 // ipc.on('print-to-pdf', function (event) {

@@ -2,22 +2,23 @@
   <div id="wrapper">
     <main>
       <header>
-        <span class="title">Current Local Holds ({{ holds.length }})</span>
-        <div id="print" class="cell">print</div>
+        <span class="title">Local Holds ({{ holds.length }})</span>
+        <button id="print-btn" class="btn" @click="print">print</button>
       </header>
-      <ul id="queue">
-        <li v-for="hold in holds"
-            class="cell info">
-          <p class="hold-call-number"><a :href="hold.primoLink" target="_blank">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
-          <p class="hold-title"> {{ hold.title }} </p>
-          <p class="hold-author"> - {{ hold.author }} </p>
-        </a></li>
-      </ul>
-      <div class="spinner" v-show="isRequestingData">
+      <div class="spinner" v-visible="isRequestingData">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>
       </div>
+        <transition-group name="list-item" tag="ul" id="queue">
+          <li v-for="hold in holds"
+              :key="hold"
+              class="cell info">
+            <p class="hold-call-number"><a :href="hold.primoLink" target="_blank">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
+            <p class="hold-title"> {{ hold.title }} </p>
+            <p class="hold-author"> - {{ hold.author }} </p>
+          </a></li>
+        </transition-group>
     </main>
   </div>
 </template>
@@ -36,7 +37,15 @@
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
+      },
+      print () {
+        this.$electron.ipcRenderer.send('print-to-pdf')
       }
+    },
+    mounted () {
+      this.$electron.ipcRenderer.on('wrote-to-pdf', (event, data) => {
+        console.log(data)
+      })
     },
     created () {
       const component = this
@@ -94,9 +103,29 @@
     opacity: 0.7;
   }
 
+  .btn {
+    background: #a9e0e5;
+    color: #0f2326;
+    border-radius: 5px;
+    font-family: Arial;
+    font-size: 16px;
+    padding: 8px 20px 8px 20px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: #a9e0e5;
+    text-decoration: none;
+  }
+
   .hold-call-number {
     color: #ef7630;
     padding-bottom: 3px;
+  }
+
+  .hold-call-number:hover {
+    text-decoration: underline;
   }
 
   .hold-title {
@@ -109,12 +138,22 @@
     font-size: 12px;
   }
 
+  .list-item-enter-active, .list-item-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+    transform-origin: left center;
+  }
+
+  .list-item-enter, .list-item-leave-to /* .list-leave-active for <2.1.8 */ {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
 
 
   /* http://tobiasahlin.com/spinkit/ */
 
   .spinner {
-    margin: 15px auto 0;
+    margin: 0 auto;
     width: 70px;
     text-align: center;
   }
