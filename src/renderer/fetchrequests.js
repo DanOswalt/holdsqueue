@@ -5,7 +5,7 @@ const processHoldsData = (requestedResources) => {
 
   if (holds.length > 0) {
     const holdsQueue = makeHoldsQueue(holds)
-    displayHoldsQueueInTerminal(holdsQueue)
+    trimTitles(holdsQueue)
     return holdsQueue
   }
 }
@@ -23,7 +23,7 @@ const makeHoldsQueue = (holds) => {
   })
 }
 
-const displayHoldsQueueInTerminal = (holdsQueue) => {
+const trimTitles = (holdsQueue) => {
   holdsQueue.forEach(hold => {
     if (hold.title.length > 40) { hold.title = hold.title.substr(0, 40) + '...' }
     // console.log('|')
@@ -63,36 +63,22 @@ const fetchRequests = (component) => {
       let fetchedCount = requestedResources.length
       let diff = totalCount - fetchedCount
 
-      // console.log(totalCount + ' total in Alma.')
-      // console.log(fetchedCount + ' results fetched in first try.')
-
       // fetch more results if count is greater
       if (diff > 0) {
-        // console.log('there are ' + diff + ' more results, hold on...')
-
         // add offset of 100, and limit HAS TO BE EXACTLY THE REMAINING NUMBER OF RECORDS $*#&^#*$
         const urlWithOffset = `${req.query}?library=${req.library}&circ_desk=${req.circ_desk}&apikey=${req.apikey}&format=${req.format}&offset=${req.offset}&limit=${diff - 1}`
 
         axios
           .get(urlWithOffset)
           .then(response => {
-            // console.log('actual holds in first batch count? ' + requestedResources.filter(req => req.request[0].request_type === 'HOLD').length)
             const moreResults = response.data.requested_resource
-            if (moreResults) {
-              // console.log(moreResults.length + ' more results fetched in second try')
-              // console.log('actual holds in second batch count? ' + moreResults.filter(req => req.request[0].request_type === 'HOLD').length)
-              // console.dir('last record in first batch: ', moreResults[moreResults.length - 1])
-              // console.dir('last record in second batch: ', requestedResources[requestedResources.length - 1])
-            } else {
-              // console.log('no requested resources with offset at ' + req.offset)
-            }
 
             requestedResources.push.apply(requestedResources, response.data.requested_resource)
             fetchedCount += moreResults.length
 
             // console.log(fetchedCount + ' requests fetched.')
 
-            component.holds = processHoldsData(requestedResources)
+            component.holds = processHoldsData(requestedResources, component.holds)
             component.lastCheck = new Date()
             component.isRequestingData = false
           }).catch(error => {
@@ -101,7 +87,7 @@ const fetchRequests = (component) => {
           })
       } else {
         // console.log('only needed one try, go to process')
-        component.holds = processHoldsData(requestedResources)
+        component.holds = processHoldsData(requestedResources, component.holds)
         component.lastCheck = new Date()
         component.isRequestingData = false
       }

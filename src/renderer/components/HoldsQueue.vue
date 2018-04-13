@@ -10,15 +10,17 @@
         <div class="bounce2"></div>
         <div class="bounce3"></div>
       </div>
-        <transition-group name="list-item" tag="ul" id="queue">
-          <li v-for="hold in holds"
-              :key="hold"
-              class="cell info">
-            <p class="hold-call-number"><a :href="hold.primoLink" target="_blank">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
-            <p class="hold-title"> {{ hold.title }} </p>
-            <p class="hold-author"> - {{ hold.author }} </p>
-          </a></li>
-        </transition-group>
+      <ul id="queue">
+      <!-- <transition-group name="list-item" tag="ul" id="queue"> -->
+        <li v-for="hold in holds"
+            :key="hold"
+            class="cell info">
+          <p class="hold-call-number"><a :href="hold.primoLink" target="_blank">{{ hold.callNumber }} ({{ hold.shelvingLocation }})</a></p>
+          <p class="hold-title"> {{ hold.title }} </p>
+          <p class="hold-author"> - {{ hold.author }} </p>
+        </a></li>
+      <!-- </transition-group> -->
+      </ul>
     </main>
   </div>
 </template>
@@ -138,14 +140,14 @@
     font-size: 12px;
   }
 
+  /* animated transitions */
+
   .list-item-enter-active, .list-item-leave-active {
-    transition: opacity 0.3s, transform 0.3s;
-    transform-origin: left center;
+    transition: opacity 1.5s;
   }
 
   .list-item-enter, .list-item-leave-to /* .list-leave-active for <2.1.8 */ {
     opacity: 0;
-    transform: scale(0.5);
   }
 
 
