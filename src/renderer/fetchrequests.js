@@ -3,11 +3,19 @@ const axios = require('axios')
 const processHoldsData = (requestedResources) => {
   const holds = requestedResources.filter(req => req.request[0].request_type === 'HOLD')
 
-  if (holds.length > 0) {
+  if (holds) {
     const holdsQueue = makeHoldsQueue(holds)
     trimTitles(holdsQueue)
     return holdsQueue
   }
+}
+
+const getTimeStamp = () => {
+  const d = new Date()
+  const hour = d.getHours()
+  let minutes = d.getMinutes()
+  if (minutes < 10) minutes = '0' + minutes
+  return `${hour}:${minutes}`
 }
 
 const makeHoldsQueue = (holds) => {
@@ -79,7 +87,7 @@ const fetchRequests = (component) => {
             // console.log(fetchedCount + ' requests fetched.')
 
             component.holds = processHoldsData(requestedResources, component.holds)
-            component.lastCheck = new Date()
+            component.lastCheckDate = getTimeStamp()
             component.isRequestingData = false
           }).catch(error => {
             console.dir(error.response.data.errorList.error)
@@ -88,7 +96,7 @@ const fetchRequests = (component) => {
       } else {
         // console.log('only needed one try, go to process')
         component.holds = processHoldsData(requestedResources, component.holds)
-        component.lastCheck = new Date()
+        component.lastCheckTime = getTimeStamp()
         component.isRequestingData = false
       }
     })

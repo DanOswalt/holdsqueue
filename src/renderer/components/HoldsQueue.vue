@@ -5,6 +5,9 @@
         <span class="title">Local Holds ({{ holds.length }})</span>
         <button id="print-btn" class="btn" @click="print">print</button>
       </header>
+      <div id="last-checked">
+        <span>Last checked: {{ lastCheckTime }}</span>
+      </div>
       <div class="spinner" v-visible="isRequestingData">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
@@ -31,7 +34,7 @@
     data () {
       return {
         holds: [],
-        lastCheck: null,
+        lastCheckTime: null,
         isRequestingData: false
       }
     },
@@ -76,6 +79,12 @@
     color: #a9e0e5;
     padding: 15px;
     font-size: 24px;
+  }
+
+  #last-checked {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 3px;
   }
 
   #queue {
