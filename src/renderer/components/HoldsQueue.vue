@@ -13,6 +13,9 @@
         <div class="bounce2"></div>
         <div class="bounce3"></div>
       </div>
+      <div id='owl-box' v-show="showOwl">
+        <owl></owl>
+      </div>
       <ul id="queue">
       <!-- <transition-group name="list-item" tag="ul" id="queue"> -->
         <li v-for="hold in holds"
@@ -28,9 +31,13 @@
 </template>
 
 <script>
+  import Owl from './HoldsQueue/Owl.vue'
+
   export default {
     name: 'holdsqueue',
-    components: {},
+    components: {
+      Owl
+    },
     data () {
       return {
         holds: [],
@@ -44,6 +51,16 @@
       },
       print () {
         this.$electron.ipcRenderer.send('print-to-pdf')
+      }
+    },
+    watch: {
+      showOwl: function () {
+        console.log('flutter')
+      }
+    },
+    computed: {
+      showOwl: function () {
+        return (this.holds === 'undefined' || this.holds.length === 0)
       }
     },
     mounted () {

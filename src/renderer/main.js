@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 
 import VueVisible from 'vue-visible'
+import Velocity from 'velocity-animate'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
+Vue.prototype.$ = Velocity
 Vue.config.productionTip = false
 
 Vue.use(VueVisible)
