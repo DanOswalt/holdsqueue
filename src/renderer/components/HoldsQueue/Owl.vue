@@ -66,11 +66,15 @@
 <script>
   export default {
     name: 'holdsqueue',
-    components: {},
+    watch: {
+      showOwl: function () {
+        console.log('flutter')
+      }
+    },
     methods: {
       flutter: function () {
-        console.log('doing flutter')
-        // this.$('#owl-svg-canvas').delay(400).velocity({ translateX: 1350 }, { duration: 500 })
+        console.log('doing flutter', window.$)
+        // $('#owl-svg-canvas').delay(400).velocity({ translateX: 20 }, { duration: 500 })
 
         this.$('#leftWing').delay(300)
           .velocity({ rotateZ: 5 })
@@ -128,8 +132,9 @@
           .velocity({ translateY: -20 }, { duration: 500 })
           .velocity({ translateY: 0 }, { duration: 200 }, { easing: 'ease-in' })
       },
-      created () {
-        this.flutter()
+      mounted () {
+        console.log('hi')
+        // this.flutter()
       }
     }
   }

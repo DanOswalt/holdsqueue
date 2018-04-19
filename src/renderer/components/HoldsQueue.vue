@@ -14,7 +14,7 @@
         <div class="bounce3"></div>
       </div>
       <div id='owl-box' v-show="showOwl">
-        <owl></owl>
+        <owl :showowl="showOwl"></owl>
       </div>
       <ul id="queue">
       <!-- <transition-group name="list-item" tag="ul" id="queue"> -->
@@ -45,22 +45,17 @@
         isRequestingData: false
       }
     },
+    computed: {
+      showOwl: function () {
+        return (this.holds === 'undefined' || this.holds.length === 0)
+      }
+    },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
       },
       print () {
         this.$electron.ipcRenderer.send('print-to-pdf')
-      }
-    },
-    watch: {
-      showOwl: function () {
-        console.log('flutter')
-      }
-    },
-    computed: {
-      showOwl: function () {
-        return (this.holds === 'undefined' || this.holds.length === 0)
       }
     },
     mounted () {
