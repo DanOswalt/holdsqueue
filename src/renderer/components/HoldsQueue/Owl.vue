@@ -65,103 +65,93 @@
 
 <script>
   export default {
-    name: 'holdsqueue',
+    name: 'owl',
+    props: [
+      'showowl'
+    ],
     watch: {
       showOwl: function () {
         console.log('flutter')
-      }
-    },
-    methods: {
-      flutter: function () {
-        console.log('doing flutter', window.$)
-        // $('#owl-svg-canvas').delay(400).velocity({ translateX: 20 }, { duration: 500 })
-
-        this.$('#leftWing').delay(300)
-          .velocity({ rotateZ: 5 })
-          .velocity({ rotateZ: -5 }, { duration: 200 })
-          .velocity({ rotateZ: 0 })
-
-        this.$('#rightWing').delay(300)
-          .velocity({ rotateZ: 5 })
-          .velocity({ rotateZ: -5 }, { duration: 200 })
-          .velocity({ rotateZ: 0 })
-
-        // several blinks over 10 seconds
-        this.$('#eyes').delay(2000)
-          .velocity({ opacity: 0 }, { duration: 100 })
-          .velocity({ opacity: 1 }, { duration: 100 })
-
-        this.$('#eyes').delay(4000)
-          .velocity({ opacity: 0 }, { duration: 100 })
-          .velocity({ opacity: 1 }, { duration: 100 })
-
-        this.$('#eyes').delay(7000)
-          .velocity({ opacity: 0 }, { duration: 100 })
-          .velocity({ opacity: 1 }, { duration: 100 })
-
-        this.$('#eyes').delay(9500)
-          .velocity({ opacity: 0 }, { duration: 100 })
-          .velocity({ opacity: 1 }, { duration: 100 })
-
-        // flutter and lift at 2000
-        this.$('#leftWing').delay(2000)
-          .velocity({ rotateZ: 5 }, { duration: 200 })
-          .velocity({ rotateZ: -5 }, { duration: 200 })
-          .velocity({ rotateZ: 5 }, { duration: 100 })
-          .velocity({ rotateZ: -5 }, { duration: 100 })
-          .velocity({ rotateZ: 5 }, { duration: 100 })
-          .velocity({ rotateZ: -5 }, { duration: 100 })
-          .velocity({ rotateZ: 5 }, { duration: 50 })
-          .velocity({ rotateZ: -5 }, { duration: 50 })
-          .velocity({ rotateZ: 5 }, { duration: 200 })
-          .velocity({ rotateZ: 0 }, { duration: 400 })
-
-        this.$('#rightWing').delay(2000)
-          .velocity({ rotateZ: -5 }, { duration: 200 })
-          .velocity({ rotateZ: 5 }, { duration: 200 })
-          .velocity({ rotateZ: -5 }, { duration: 100 })
-          .velocity({ rotateZ: 5 }, { duration: 100 })
-          .velocity({ rotateZ: -5 }, { duration: 100 })
-          .velocity({ rotateZ: 5 }, { duration: 100 })
-          .velocity({ rotateZ: -5 }, { duration: 50 })
-          .velocity({ rotateZ: 5 }, { duration: 50 })
-          .velocity({ rotateZ: -5 }, { duration: 200 })
-          .velocity({ rotateZ: 0 }, { duration: 400 })
-
-        this.$('#owl-svg-canvas').delay(3000)
-          .velocity({ translateY: -20 }, { duration: 500 })
-          .velocity({ translateY: 0 }, { duration: 200 }, { easing: 'ease-in' })
-      },
-      mounted () {
-        console.log('hi')
-        // this.flutter()
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
 
   #owl-container {
     text-align: center;
     margin-left: 40px;
-    margin-top: 150px;
   }
 
   #eyes {
     fill: #0f2326;
+    animation: eyeblink 20s infinite;
   }
 
   #leftWing {
     transform-origin: top left;
+    animation: flutterLeft 30s infinite;
   }
 
   #rightWing {
     transform-origin: top right;
+    animation: flutterRight 30s infinite;
   }
 
   #chest {
     transform-origin: top left;
   }
+
+  @keyframes eyeblink {
+    0%   { opacity: 1; }
+    9%   { opacity: 1; }
+    10%  { opacity: 0; }
+    11%  { opacity: 1; }
+    49%  { opacity: 1; }
+    50%  { opacity: 0; }
+    51%  { opacity: 1; }
+    69%  { opacity: 1; }
+    70%  { opacity: 0; }
+    71%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes flutterRight {
+    1% { transform: rotate(0deg); }
+    3% { transform: rotate(-15deg); }
+    5% { transform: rotate(0deg); }
+    8% { transform: rotate(0deg); }
+    11% { transform: rotate(-5deg); }
+    12% { transform: rotate(0deg); }
+    40% { transform: rotate(0deg); }
+    42% { transform: rotate(-10deg); }
+    43% { transform: rotate(0deg); }
+    60% { transform: rotate(0deg); }
+    61% { transform: rotate(-10deg); }
+    64% { transform: rotate(0deg); }
+    80% { transform: rotate(0deg); }
+    82% { transform: rotate(-5deg); }
+    84% { transform: rotate(0deg); }
+  }
+
+  @keyframes flutterLeft {
+    1% { transform: rotate(0deg); }
+    3% { transform: rotate(15deg); }
+    5% { transform: rotate(0deg); }
+    8% { transform: rotate(0deg); }
+    11% { transform: rotate(5deg); }
+    12% { transform: rotate(0deg); }
+    50% { transform: rotate(0deg); }
+    52% { transform: rotate(10deg); }
+    53% { transform: rotate(0deg); }
+    63% { transform: rotate(0deg); }
+    64% { transform: rotate(10deg); }
+    66% { transform: rotate(0deg); }
+    80% { transform: rotate(0deg); }
+    82% { transform: rotate(5deg); }
+    84% { transform: rotate(0deg); }
+  }
+
 
 </style>
