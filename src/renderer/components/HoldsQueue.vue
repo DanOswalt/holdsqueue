@@ -14,7 +14,7 @@
         <div class="bounce3"></div>
       </div>
       <div id='owl-box' v-show="showOwl">
-        <owl :showowl="showOwl"></owl>
+        <owl :showOwl="showOwl"></owl>
       </div>
       <ul id="queue">
       <!-- <transition-group name="list-item" tag="ul" id="queue"> -->

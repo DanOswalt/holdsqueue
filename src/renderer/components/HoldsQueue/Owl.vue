@@ -67,11 +67,11 @@
   export default {
     name: 'owl',
     props: [
-      'showowl'
+      'showOwl'
     ],
     watch: {
       showOwl: function () {
-        console.log('flutter')
+        console.log('showOwl changed in parent')
       }
     }
   }
@@ -152,6 +152,5 @@
     82% { transform: rotate(5deg); }
     84% { transform: rotate(0deg); }
   }
-
 
 </style>
