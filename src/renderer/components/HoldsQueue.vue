@@ -2,7 +2,7 @@
   <div id="wrapper">
     <main>
       <header>
-        <span class="title">Local Holds ({{ holds.length }})</span>
+        <span class="title">Pick up from shelf ({{ holds.length }})</span>
         <button id="print-btn" class="btn" @click="print">print</button>
       </header>
       <div id="last-checked">
@@ -90,7 +90,7 @@
     text-align: center;
     color: #a9e0e5;
     padding: 15px;
-    font-size: 24px;
+    font-size: 20px;
   }
 
   #last-checked {

@@ -26,7 +26,7 @@ const makeHoldsQueue = (holds) => {
       requester: hold.request[0].requester.desc,
       title: hold.resource_metadata.title,
       author: hold.resource_metadata.author,
-      primoLink: `https://primo.lclark.edu/primo-explore/search?query=any,contains,${encodeURI(hold.location.call_number)}&tab=default_tab&search_scope=lcc_nz_pc&vid=LCC&lang=en_US&offset=0`
+      primoLink: `https://primo.lclark.edu/primo-explore/search?query=any,contains,${encodeURI(hold.location.call_number)}&tab=default_tab&search_scope=lcc_nz_pc&vid=LCC&lang=en_US&offset=0&tab=lc_only&search_scope=lcc_local`
     }
   })
 }
