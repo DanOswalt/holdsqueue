@@ -22,7 +22,7 @@
   }
 
   body {
-    font-family: 'Monaco', 'Comfortaa', sans-serif;
+    font-family: 'Comfortaa', sans-serif;
     color: #eee;
     background: #0f2326;
   }

@@ -81,14 +81,14 @@
   }
 
   body {
-    font-family: 'Monaco', sans-serif;
+    /* font-family: 'Monaco', sans-serif; */
     color: #eee;
     background: #0f2326;
   }
 
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
     color: #a9e0e5;
@@ -118,7 +118,7 @@
     color: #444;
     background: #0f2326;
     border: #51bec0 1px solid;
-    padding: 10px 15px;
+    padding: 15px 15px;
     margin: 4px;
     border-radius: 10px;
     color: #a9e0e5;
