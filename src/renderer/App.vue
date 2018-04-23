@@ -12,6 +12,9 @@
 
 <style>
   /* CSS */
+
+  @import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -19,7 +22,7 @@
   }
 
   body {
-    font-family: 'Monaco', sans-serif;
+    font-family: 'Monaco', 'Comfortaa', sans-serif;
     color: #eee;
     background: #0f2326;
   }
