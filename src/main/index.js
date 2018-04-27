@@ -68,16 +68,19 @@ ipcMain.on('print-to-pdf', (e) => {
   })
 })
 
-ipcMain.on('set-badge', (e) => {
-  console.log('set badge')
-  let image = nativeImage.createFromPath('../../build/icons/notify.png')
+ipcMain.on('set-overlay', (e) => {
+  let image = nativeImage.createFromPath('../build/icons/notify.png')
   mainWindow.setOverlayIcon(image, 'no holds')
+  if (image.isEmpty()) {
+    e.sender.send('overlay-set', 'overlay image was null')
+  } else {
+    e.sender.send('overlay-set', 'overlay set')
+  }
 })
 
-ipcMain.on('set-no-badge', (e) => {
-  console.log('set no badge')
-  let image = nativeImage.createFromPath('../../build/icons/icon.ico')
-  mainWindow.setOverlayIcon(image, 'holds exist')
+ipcMain.on('remove-overlay', (e) => {
+  mainWindow.setOverlayIcon(null, 'holds exist')
+  e.sender.send('overlay-removed', 'overlay removed')
 })
 
 /**

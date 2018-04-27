@@ -64,9 +64,9 @@
     watch: {
       holds: function () {
         if (this.holdsExist) {
-          this.$electron.ipcRenderer.send('set-badge')
+          this.$electron.ipcRenderer.send('set-overlay')
         } else {
-          this.$electron.ipcRenderer.send('set-no-badge')
+          this.$electron.ipcRenderer.send('remove-overlay')
         }
       }
     },
@@ -74,10 +74,16 @@
       this.$electron.ipcRenderer.on('wrote-to-pdf', (event, data) => {
         console.log(data)
       })
+      this.$electron.ipcRenderer.on('overlay-set', (event, data) => {
+        console.log(data)
+      })
+      this.$electron.ipcRenderer.on('overlay-removed', (event, data) => {
+        console.log(data)
+      })
     },
     created () {
-      const component = this
       const fetchRequests = require('../fetchRequests.js')
+      const component = this
       fetchRequests(component)
       setInterval(fetchRequests, 2 * 60 * 1000, component)
     }
