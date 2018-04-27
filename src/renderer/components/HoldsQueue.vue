@@ -48,6 +48,9 @@
     computed: {
       showOwl: function () {
         return (this.holds === 'undefined' || this.holds.length === 0)
+      },
+      holdsExist: function () {
+        return this.holds.length > 0
       }
     },
     methods: {
@@ -56,6 +59,15 @@
       },
       print () {
         this.$electron.ipcRenderer.send('print-to-pdf')
+      }
+    },
+    watch: {
+      holds: function () {
+        if (this.holdsExist) {
+          this.$electron.ipcRenderer.send('set-badge')
+        } else {
+          this.$electron.ipcRenderer.send('set-no-badge')
+        }
       }
     },
     mounted () {

@@ -34,10 +34,6 @@ const makeHoldsQueue = (holds) => {
 const trimTitles = (holdsQueue) => {
   holdsQueue.forEach(hold => {
     if (hold.title.length > 40) { hold.title = hold.title.substr(0, 40) + '...' }
-    // console.log('|')
-    // console.log(`${hold.callNumber} (${hold.shelvingLocation})`)
-    // console.log(`${hold.title}, ${hold.author}`)
-    // console.log(`${hold.requester}`)
   })
 }
 

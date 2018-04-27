@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, shell, nativeImage } from 'electron'
 
 const path = require('path')
 const fs = require('fs')
@@ -68,20 +68,17 @@ ipcMain.on('print-to-pdf', (e) => {
   })
 })
 
-// ipc.on('print-to-pdf', function (event) {
-//   const pdfPath = path.join(__dirname, '/reports/print.pdf')
-//   const win = BrowserWindow.fromWebContents(event.sender)
-//   win.webContents.printToPDF({printBackground: true, landscape: true}, function (error, data) {
-//     if (error) throw error
-//     fs.writeFile(pdfPath, data, function (error) {
-//       if (error) {
-//         throw error
-//       }
-//       shell.openExternal('file://' + pdfPath)
-//       event.sender.send('wrote-pdf', pdfPath)
-//     })
-//   })
-// })
+ipcMain.on('set-badge', (e) => {
+  console.log('set badge')
+  let image = nativeImage.createFromPath('../../build/icons/notify.png')
+  mainWindow.setOverlayIcon(image, 'no holds')
+})
+
+ipcMain.on('set-no-badge', (e) => {
+  console.log('set no badge')
+  let image = nativeImage.createFromPath('../../build/icons/icon.ico')
+  mainWindow.setOverlayIcon(image, 'holds exist')
+})
 
 /**
  * Auto Updater
