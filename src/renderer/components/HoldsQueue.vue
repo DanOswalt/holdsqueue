@@ -71,6 +71,11 @@
       }
     },
     mounted () {
+      const fetchRequests = require('../fetchRequests.js')
+      const component = this
+      fetchRequests(component)
+      setInterval(fetchRequests, 2 * 60 * 1000, component)
+
       this.$electron.ipcRenderer.on('wrote-to-pdf', (event, data) => {
         console.log(data)
       })
@@ -80,12 +85,6 @@
       this.$electron.ipcRenderer.on('overlay-removed', (event, data) => {
         console.log(data)
       })
-    },
-    created () {
-      const fetchRequests = require('../fetchRequests.js')
-      const component = this
-      fetchRequests(component)
-      setInterval(fetchRequests, 2 * 60 * 1000, component)
     }
   }
 </script>
