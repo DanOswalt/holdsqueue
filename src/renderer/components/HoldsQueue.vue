@@ -32,6 +32,7 @@
 
 <script>
   import Owl from './HoldsQueue/Owl.vue'
+  import fetchRequests from '../fetchRequests.js'
 
   export default {
     name: 'holdsqueue',
@@ -71,7 +72,6 @@
       }
     },
     mounted () {
-      const fetchRequests = require('../fetchRequests.js')
       const component = this
       fetchRequests(component)
       setInterval(fetchRequests, 2 * 60 * 1000, component)
