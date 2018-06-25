@@ -1,6 +1,12 @@
 # holdsqueue
 
-> alma holds 4 u
+An electron.js desktop application that displays a live queue of our library's current holds requests, via the User API in ALMA (our library software vendor).
+
+This improves our service by giving us the ability to see and fetch holds request the moment they come in, instead of processing a report one time per day. As a reward for getting the queue down to zero, you'll see our owl logo chilling out.
+
+
+
+[![https://gyazo.com/f452ff06fb7df989876fcb115fbac666](https://i.gyazo.com/f452ff06fb7df989876fcb115fbac666.gif)](https://gyazo.com/f452ff06fb7df989876fcb115fbac666)
 
 #### Build Setup
 
