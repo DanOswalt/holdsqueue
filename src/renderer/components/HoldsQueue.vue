@@ -32,7 +32,7 @@
 
 <script>
   import Owl from './HoldsQueue/Owl.vue'
-  import fetchRequests from '../fetchRequests.js'
+  import fetchRequests from '../modules/fetchRequests.js'
 
   export default {
     name: 'holdsqueue',

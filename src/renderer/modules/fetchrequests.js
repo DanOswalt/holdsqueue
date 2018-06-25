@@ -79,9 +79,6 @@ const fetchRequests = (component) => {
 
             requestedResources.push.apply(requestedResources, response.data.requested_resource)
             fetchedCount += moreResults.length
-
-            // console.log(fetchedCount + ' requests fetched.')
-
             component.holds = processHoldsData(requestedResources, component.holds)
             component.lastCheckDate = getTimeStamp()
             component.isRequestingData = false

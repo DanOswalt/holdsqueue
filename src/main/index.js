@@ -25,7 +25,6 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     height: 1000,
-    // useContentSize: true,
     width: 400,
     webPreferences: {webSecurity: false} // turn this off in production!
   })
