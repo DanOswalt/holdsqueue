@@ -11,7 +11,7 @@ This improves our service by giving us the ability to see and fetch holds reques
 ## Tech used
 * JavaScript (ES6) / Node
 * Electron.js
-* Vue.js
+* Vue.js (w/ Webpack and Babel)
 * HTML5 / CSS3 / SVG Animation
 * Web APIs
 
