@@ -9,11 +9,11 @@ This improves our service by giving us the ability to see and fetch holds reques
 [![https://gyazo.com/f452ff06fb7df989876fcb115fbac666](https://i.gyazo.com/f452ff06fb7df989876fcb115fbac666.gif)](https://gyazo.com/f452ff06fb7df989876fcb115fbac666)
 
 ## Tech used
-JavaScript (ES) / Node
-Electron.js
-Vue.js
-HTML5 / CSS3 / SVG Animation
-Web APIs
+* JavaScript (ES6) / Node
+* Electron.js
+* Vue.js
+* HTML5 / CSS3 / SVG Animation
+* Web APIs
 
 #### Build Setup
 
